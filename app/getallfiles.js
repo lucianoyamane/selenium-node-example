@@ -9,11 +9,16 @@ module.exports = (() => {
     const _pathIsDirectory = function(currentPath) {
         return lstatSync(currentPath).isDirectory() 
     }
+    const fileIsJS = function(dirPath){
+        return dirPath.endsWith(".js")
+    }
 
     const _getAllFiles = function(currentPath, result) {
         if(_pathIsFile(currentPath)){
             return [currentPath]
         }
+
+        result = result || []
     
         let subPaths = readdirSync(currentPath)
     
@@ -25,9 +30,15 @@ module.exports = (() => {
                 result.push(join(__dirname, composedPath))
             }
         })
+        return result;
     };
 
+    const _getJSFiles = function(currentPath) {
+        let result = _getAllFiles(currentPath);
+        return result.filter(file => fileIsJS(file));
+    }
+
     return {
-        getAllFiles: _getAllFiles
+        getJSFiles: _getJSFiles
     }
 })();

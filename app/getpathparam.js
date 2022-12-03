@@ -11,6 +11,6 @@ module.exports = (() => {
     };
 
     return {
-        getPathParam: _getPathParam
+        pathParam: _getPathParam()
     }
 })();
