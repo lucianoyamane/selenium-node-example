@@ -1,0 +1,10 @@
+{
+    "diretorio_teste": "./testes/servicoteste/",
+    "timeout": 30000,
+    "timeout_react": 500,
+    "screen_mode": false,
+    "url_base_servico_teste": "http://localhost:3000", 
+    "url_base_solidkore_demo": "http://localhost:4201", 
+    "browsers": ["chrome"]
+}
+
