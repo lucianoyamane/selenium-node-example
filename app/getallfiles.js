@@ -3,17 +3,17 @@ const { join } = require("path");
 
 
 module.exports = (() => {
-    const _pathIsFile = function(currentPath){
+    const _pathIsFile = (currentPath) => {
         return lstatSync(currentPath).isFile() 
     }
-    const _pathIsDirectory = function(currentPath) {
+    const _pathIsDirectory = (currentPath) => {
         return lstatSync(currentPath).isDirectory() 
     }
-    const _fileType = function(dirPath, type){
+    const _fileType = (dirPath, type) => {
         return dirPath.endsWith(type)
     }
 
-    const _getAllFiles = function(currentPath, result) {
+    const _getAllFiles = (currentPath, result) => {
         if(_pathIsFile(currentPath)){
             return [currentPath]
         }
@@ -33,7 +33,7 @@ module.exports = (() => {
         return result;
     };
 
-    const _getJSFiles = function(currentPath) {
+    const _getJSFiles = (currentPath) => {
         let result = _getAllFiles(currentPath);
         return result.filter(file => _fileType(file, '.js'));
     }
