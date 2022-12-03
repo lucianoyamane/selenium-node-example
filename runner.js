@@ -1,38 +1,16 @@
-const { readdirSync, lstatSync } = require('fs');
-const { join } = require("path");
-const { asyncForEach } = require('./app/async.for.each');
 
+const { asyncForEach } = require('./app/asyncforeach');
+const { getAllFiles } = require('./app/getallfiles');
+
+const args = process.argv.slice(2);
+const path = args[0];
 
 (async () => {
     await asyncForEach(["chai"], async (value, index) => {
-        console.log(value, index);
-
-        const pathIsFile = function(currentPath){
-            return lstatSync(currentPath).isFile() 
-        }
-        const pathIsDirectory = function(currentPath) {
-            return lstatSync(currentPath).isDirectory() 
-        }
-        const getAllFiles = function(currentPath, arrayOfFiles) {
-            
-            if(pathIsFile(currentPath)){
-                return [currentPath]
-            }
-
-            let subPaths = readdirSync(currentPath)
-        
-            subPaths.forEach((subPath) => {
-                let composedPath = `${currentPath}/${subPath}`
-                if (pathIsDirectory(composedPath)) {
-                    getAllFiles(composedPath, arrayOfFiles)
-                } else {
-                    arrayOfFiles.push(join(__dirname, composedPath))
-                }
-            })
-        }
+    
         const result = [];
-
-        getAllFiles("./node_modules/chai", result);
+        getAllFiles(path, result);
         result.forEach(value => console.log(value));
+        console.log(value, index);
     })
 })();
