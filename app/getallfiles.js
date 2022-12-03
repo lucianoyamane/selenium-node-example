@@ -9,8 +9,8 @@ module.exports = (() => {
     const _pathIsDirectory = function(currentPath) {
         return lstatSync(currentPath).isDirectory() 
     }
-    const fileIsJS = function(dirPath){
-        return dirPath.endsWith(".js")
+    const _fileType = function(dirPath, type){
+        return dirPath.endsWith(type)
     }
 
     const _getAllFiles = function(currentPath, result) {
@@ -35,10 +35,11 @@ module.exports = (() => {
 
     const _getJSFiles = function(currentPath) {
         let result = _getAllFiles(currentPath);
-        return result.filter(file => fileIsJS(file));
+        return result.filter(file => _fileType(file, '.js'));
     }
 
     return {
-        getJSFiles: _getJSFiles
+        getJSFiles: _getJSFiles,
+        getAllFiles: _getAllFiles
     }
 })();
