@@ -15,7 +15,7 @@ module.exports = (() => {
 
     const _getAllFiles = (currentPath, result) => {
         if(_pathIsFile(currentPath)){
-            return [currentPath]
+            return [join(__dirname, currentPath)]
         }
 
         result = result || []

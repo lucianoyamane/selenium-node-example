@@ -7,7 +7,11 @@ const { pathParam } = require('./app/getpathparam');
 
     await asyncForEach(["chai"], async (value, index) => {
         const jsFiles = getJSFiles(pathParam);
-        jsFiles.forEach(value => console.log(value));
-        console.log(value, index);
+        await asyncForEach(jsFiles, async (testCase) => {
+            console.log(
+                `Running ${testCase}`
+            );
+            
+        });
     })
 })();
