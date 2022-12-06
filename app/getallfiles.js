@@ -13,9 +13,9 @@ module.exports = (() => {
         return dirPath.endsWith(type)
     }
 
-    const _getAllFiles = (currentPath, result) => {
+    const _getAllFiles = (absolutePath, currentPath, result) => {
         if(_pathIsFile(currentPath)){
-            return [join(__dirname, currentPath)]
+            return [join(absolutePath, currentPath)]
         }
 
         result = result || []
@@ -25,21 +25,21 @@ module.exports = (() => {
         subPaths.forEach(subPath => {
             let composedPath = `${currentPath}/${subPath}`
             if (_pathIsDirectory(composedPath)) {
-                _getAllFiles(composedPath, result)
+                _getAllFiles(absolutePath, composedPath, result)
             } else {
-                result.push(join(__dirname, composedPath))
+                result.push(join(absolutePath, composedPath))
             }
         })
         return result;
     };
 
-    const _getJSFiles = (currentPath) => {
-        let result = _getAllFiles(currentPath);
-        return result.filter(file => _fileType(file, '.js'));
+    const _getTestJSFiles = (absolutePath, currentPath) => {
+        let result = _getAllFiles(absolutePath, currentPath);
+        return result.filter(file => _fileType(file, 'test.js'));
     }
 
     return {
-        getJSFiles: _getJSFiles,
+        getTestJSFiles: _getTestJSFiles,
         getAllFiles: _getAllFiles
     }
 })();

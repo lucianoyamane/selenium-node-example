@@ -1,0 +1,5 @@
+services:
+  formexample:
+    build: .
+    ports:
+      - "3600:80"
