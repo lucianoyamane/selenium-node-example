@@ -1,41 +1,35 @@
 const { expect } = require('chai');
 const config = require('../../../config.runner.json');
-
-const { IndexHtmlPageObject } = require('../../pageObject/index.html.pageobject');
-
-const { clickByCss } = require('../../pageObject/pageobject').cssFunctions();
+const { radio1Click, radio2Click, radio1Checked, radio2Checked } = require('../../pageObject/index.html.pageobject');
+const driver = global.driver;
 
 describe('radiobutton default', function() {
 
-    const driver = global.driver;
 
     before(async function() {
         await driver.get(`${config.url_base}/`);
-        this.pageObject = new IndexHtmlPageObject(driver);
     });
 
     it('radiobutton screen initial state', async function() { 
-        let radio1Checked = await this.pageObject.radio1Checked();
-        expect(radio1Checked).to.be.null;
+        let radio1IsChecked = await radio1Checked();
+        expect(radio1IsChecked).to.be.null;
 
-        let radio2Checked = await this.pageObject.radio2Checked();
-        expect(radio2Checked).to.be.null;
+        let radio2IsChecked = await radio2Checked();
+        expect(radio2IsChecked).to.be.null;
     });
 
     it('radiobutton click radio 1', async function() {
-        // await this.pageObject.radio1Click();
-
-        await clickByCss("div:nth-child(1) > .radio");
+        await radio1Click();
         
-        let radio1Checked = await this.pageObject.radio1Checked();
-        expect(radio1Checked).to.equal('true');
+        let radio1IsChecked = await radio1Checked();
+        expect(radio1IsChecked).to.equal('true');
     });
 
     it('radiobutton click radio 2', async function() {
-        await this.pageObject.radio2Click();
+        await radio2Click();
 
-        let radio2Checked = await this.pageObject.radio2Checked();
-        expect(radio2Checked).to.equal('true');
+        let radio2IsChecked = await radio2Checked();
+        expect(radio2IsChecked).to.equal('true');
     });
     
 
