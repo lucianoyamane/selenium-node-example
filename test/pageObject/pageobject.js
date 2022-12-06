@@ -18,14 +18,14 @@ class PageObject {
         return await this.driver.findElement(By.name(name));
     }
 
-    async checkedById(id){
-        await this.sleepReact(500);
-        return await this.findElementValueById(id,"getAttribute","checked");
-    }
-
     async findElementValueByName(name, functionName, param){
         let element = await this.elementByName(name);
         return element[functionName](param);
+    }
+
+    async checkedById(id){
+        await this.sleepReact(500);
+        return await this.findElementValueById(id,"getAttribute","checked");
     }
 
     async elementById(name) {
@@ -63,3 +63,54 @@ class PageObject {
 }
 
 module.exports.PageObject = PageObject;
+
+
+module.exports.cssFunctions = () => {
+
+    const __sleepReact = (driver, timeout) => {
+        let timeoutValue = timeout?timeout:config.timeout_react;
+        return driver.sleep(timeoutValue);
+    }
+
+    const __elementByCss = async (driver, css) => {
+        return await driver.findElement(By.css(css));
+    }
+
+    const __findElementValueByCss = async (driver, name, functionName, param) => {
+        let element = await __elementByCss(driver, name);
+        return element[functionName](param);
+    }
+
+    const _valueByCss = async (name) => {
+        return await _findElementValueByCss(name,"getAttribute","value");
+    }
+
+    const __clickByCss = async(driver, css) => {
+        await __sleepReact(driver, 500);
+        await __findElementValueByCss(driver, css,"click");
+    }
+
+    return {
+        clickByCss: __clickByCss
+    }
+};
+
+module.exports.nameFunctions = (driver) => {
+
+    const _elementByName = async (name) => {
+        return await driver.findElement(By.name(name));
+    }
+
+    const _findElementValueByName = async (name, functionName, param) => {
+        let element = await _elementByName(name);
+        return element[functionName](param);
+    }
+
+    const _valueByName = async (name) => {
+        return await _findElementValueByName(name,"getAttribute","value");
+    }
+
+    return {
+        valueByName: _valueByName
+    }
+};

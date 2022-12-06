@@ -3,6 +3,8 @@ const config = require('../../../config.runner.json');
 
 const { IndexHtmlPageObject } = require('../../pageObject/index.html.pageobject');
 
+const { clickByCss } = require('../../pageObject/pageobject').cssFunctions();
+
 describe('radiobutton default', function() {
 
     const driver = global.driver;
@@ -21,7 +23,9 @@ describe('radiobutton default', function() {
     });
 
     it('radiobutton click radio 1', async function() {
-        await this.pageObject.radio1Click();
+        // await this.pageObject.radio1Click();
+
+        await clickByCss("div:nth-child(1) > .radio");
         
         let radio1Checked = await this.pageObject.radio1Checked();
         expect(radio1Checked).to.equal('true');
