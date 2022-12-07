@@ -1,20 +1,21 @@
+const Mocha = require('mocha');
+
 const { asyncForEach } = require('./app/asyncforeach');
 const { getTestJSFiles } = require('./app/getallfiles');
 const { pathParam } = require('./app/getpathparam');
 const { runChrome } = require('./app/runchrome');
 const { scoped } = require('./scoped.test');
+const { browsers, timeout } = require('./config.runner.json');
 
-const Mocha = require('mocha');
 
 (async () => {
-
-    await asyncForEach(["chrome"], async (value, index) => {
+    await asyncForEach(browsers, async (value, index) => {
         const jsFiles = getTestJSFiles(__dirname, pathParam);
         await asyncForEach(jsFiles, async (testCase) => {
             scoped.drive = await runChrome(value);
             return new Promise((resolve, reject) => {
                 const mocha = new Mocha({
-                    timeout: 10000
+                    timeout: timeout
                 });
 
                 mocha.suite.on('require', function (module, file) {
@@ -24,7 +25,7 @@ const Mocha = require('mocha');
                     `Running ${testCase} on ${value}`
                 );
 
-                mocha.addFile(`${testCase}`);
+                mocha.addFile(testCase);
                 mocha.run()
                     .on('pass', test => {
                         scoped.passes++;

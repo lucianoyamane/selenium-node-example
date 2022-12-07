@@ -1,13 +1,9 @@
 const { By } = require('selenium-webdriver');
 const { scoped } = require('../../../scoped.test');
+const { sleepReact } = require('./share.functions')
 const driver = scoped.drive;
 
 module.exports = (() => {
-
-    const _sleepReact = (timeout) => {
-        let timeoutValue = timeout?timeout:config.timeout_react;
-        return driver.sleep(timeoutValue);
-    }
 
     const _elementByCss = async (css) => {
         return await driver.findElement(By.css(css));
@@ -23,7 +19,7 @@ module.exports = (() => {
     }
 
     const clickByCss = async (css) => {
-        await _sleepReact(500);
+        await sleepReact();
         await _findElementValueByCss(css,"click");
     }
 
