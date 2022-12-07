@@ -7,15 +7,3 @@ const nameValue = async (driver) => {
 module.exports = {
     nameValue
 }
-
-
-// module.exports = (() => {
-    
-//     const nameValue = async () => {
-//         return await valueById("name");
-//     }
-
-//     return {
-//         nameValue: nameValue
-//     }
-// })();
