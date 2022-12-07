@@ -1,15 +1,20 @@
 const { timeout_react } = require('../../../config.runner.json');
 const { scoped } = require('../../../scoped.test');
-const driver = scoped.drive;
+// const driver = scoped.driver;
 
-module.exports = (() => {
 
-    const sleepReact = (timeout) => {
-        let timeoutValue = timeout?timeout:timeout_react;
-        return driver.sleep(timeoutValue);
-    }
+const sleepReact = (driver, timeout) => {
+    let timeoutValue = timeout?timeout:timeout_react;
+    return driver.sleep(timeoutValue);
+}
 
-    return {
-        sleepReact
-    }
-})();
+module.exports.sleepReact = sleepReact;
+
+// module.exports.shareFunctions = (driver) => {
+
+    
+
+//     return {
+//         sleepReact
+//     }
+// };
