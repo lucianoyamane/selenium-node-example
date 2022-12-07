@@ -12,7 +12,7 @@ const { browsers, timeout } = require('./config.runner.json');
     await asyncForEach(browsers, async (value, index) => {
         const jsFiles = getTestJSFiles(__dirname, pathParam);
         await asyncForEach(jsFiles, async (testCase) => {
-            scoped.drive = await runChrome(value);
+            scoped.driver = await runChrome(value);
             return new Promise((resolve, reject) => {
                 const mocha = new Mocha({
                     timeout: timeout
