@@ -1,33 +1,33 @@
 const { By } = require('selenium-webdriver');
-const { scoped } = require('../../../scoped.driver');
+const { scoped } = require('../../../scoped.test');
 const driver = scoped.drive;
 
 module.exports = (() => {
 
-    const __sleepReact = (timeout) => {
+    const _sleepReact = (timeout) => {
         let timeoutValue = timeout?timeout:config.timeout_react;
         return driver.sleep(timeoutValue);
     }
 
-    const __checkedById = async (id) => {
-        await __sleepReact(500);
-        return await __findElementValueById(id,"getAttribute","checked");
+    const checkedById = async (id) => {
+        await _sleepReact(500);
+        return await _findElementValueById(id,"getAttribute","checked");
     }
 
-    const __elementById = async (name) => {
+    const _elementById = async (name) => {
         return await driver.findElement(By.id(name));
     }
 
-    const __findElementValueById = async (id, functionName, param) => {
-        let element = await __elementById(id);
+    const _findElementValueById = async (id, functionName, param) => {
+        let element = await _elementById(id);
         return element[functionName](param);
     }
 
-    const __valueById = async (id) => {
-        return await __findElementValueById(id,"getAttribute","value");
+    const _valueById = async (id) => {
+        return await _findElementValueById(id,"getAttribute","value");
     }
 
     return {
-        checkedById: __checkedById
+        checkedById
     }
 })();

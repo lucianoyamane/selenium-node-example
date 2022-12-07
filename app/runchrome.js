@@ -1,7 +1,7 @@
 const { Builder } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 
-let runChrome = async (browser) => {
+module.exports.runChrome = async (browser) => {
     try {
         let options = new chrome.Options();
         options.setChromeBinaryPath('/usr/bin/google-chrome');
@@ -17,5 +17,3 @@ let runChrome = async (browser) => {
     }
 
 }
-
-module.exports.runChrome = runChrome;

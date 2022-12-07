@@ -1,20 +1,20 @@
 const { By } = require('selenium-webdriver');
-const { scoped } = require('../../../scoped.driver');
+const { scoped } = require('../../../scoped.test');
 const driver = scoped.drive;
 
 module.exports = (() => {
 
-    const __sleepReact = (timeout) => {
+    const _sleepReact = (timeout) => {
         let timeoutValue = timeout?timeout:config.timeout_react;
         return driver.sleep(timeoutValue);
     }
 
-    const __elementByCss = async (css) => {
+    const _elementByCss = async (css) => {
         return await driver.findElement(By.css(css));
     }
 
-    const __findElementValueByCss = async (name, functionName, param) => {
-        let element = await __elementByCss(name);
+    const _findElementValueByCss = async (name, functionName, param) => {
+        let element = await _elementByCss(name);
         return element[functionName](param);
     }
 
@@ -22,12 +22,12 @@ module.exports = (() => {
         return await _findElementValueByCss(name,"getAttribute","value");
     }
 
-    const __clickByCss = async (css) => {
-        await __sleepReact(500);
-        await __findElementValueByCss(css,"click");
+    const clickByCss = async (css) => {
+        await _sleepReact(500);
+        await _findElementValueByCss(css,"click");
     }
 
     return {
-        clickByCss: __clickByCss
+        clickByCss
     }
 })();

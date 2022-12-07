@@ -1,23 +1,23 @@
 const { By } = require('selenium-webdriver');
-const { scoped } = require('../../../scoped.driver');
+const { scoped } = require('../../../scoped.test');
 const driver = scoped.drive;
 
 module.exports = (() => {
 
-    const __elementByName = async (name) => {
+    const _elementByName = async (name) => {
         return await driver.findElement(By.name(name));
     }
 
-    const __findElementValueByName = async (name, functionName, param) => {
-        let element = await __elementByName(name);
+    const _findElementValueByName = async (name, functionName, param) => {
+        let element = await _elementByName(name);
         return element[functionName](param);
     }
 
-    const __valueByName = async (name) => {
-        return await __findElementValueByName(name,"getAttribute","value");
+    const valueByName = async (name) => {
+        return await _findElementValueByName(name,"getAttribute","value");
     }
 
     return {
-        valueByName: __valueByName
+        valueByName
     }
 })();
