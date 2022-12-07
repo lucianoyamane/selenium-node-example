@@ -1,6 +1,6 @@
 const { By } = require('selenium-webdriver');
-
-const driver = global.driver;
+const { scoped } = require('../../../scoped.driver');
+const driver = scoped.drive;
 
 module.exports = (() => {
 

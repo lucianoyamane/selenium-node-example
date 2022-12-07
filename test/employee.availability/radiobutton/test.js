@@ -1,7 +1,9 @@
 const { expect } = require('chai');
 const config = require('../../../config.runner.json');
 const { radio1Click, radio2Click, radio1Checked, radio2Checked } = require('../../pageObject/index.html.pageobject');
-const driver = global.driver;
+const { scoped } = require('../../../scoped.driver');
+
+const driver = scoped.drive;
 
 describe('radiobutton default', function() {
 

@@ -1,6 +1,6 @@
 const { By } = require('selenium-webdriver');
-
-const driver = global.driver;
+const { scoped } = require('../../../scoped.driver');
+const driver = scoped.drive;
 
 module.exports = (() => {
 
@@ -22,7 +22,7 @@ module.exports = (() => {
         return await _findElementValueByCss(name,"getAttribute","value");
     }
 
-    const __clickByCss = async(css) => {
+    const __clickByCss = async (css) => {
         await __sleepReact(500);
         await __findElementValueByCss(css,"click");
     }

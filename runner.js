@@ -2,6 +2,7 @@ const { asyncForEach } = require('./app/asyncforeach');
 const { getTestJSFiles } = require('./app/getallfiles');
 const { pathParam } = require('./app/getpathparam');
 const { runChrome } = require('./app/runchrome');
+const { scoped } = require('./scoped.driver');
 
 const Mocha = require('mocha');
 
@@ -13,7 +14,7 @@ const Mocha = require('mocha');
         var failures = 0;
         var sum = 0;
         await asyncForEach(jsFiles, async (testCase) => {
-            global.driver = await runChrome(value);
+            scoped.drive = await runChrome(value);
             return new Promise((resolve, reject) => {
                 const mocha = new Mocha({
                     timeout: 10000
