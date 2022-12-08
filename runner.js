@@ -1,5 +1,4 @@
 const Mocha = require('mocha');
-
 const { asyncForEach } = require('./app/asyncforeach');
 const { getTestJSFiles } = require('./app/getallfiles');
 const { pathParam } = require('./app/getpathparam');
