@@ -27,7 +27,7 @@ module.exports = (() => {
             if (_pathIsDirectory(composedPath)) {
                 _getAllFiles(absolutePath, composedPath, result)
             } else {
-                result.push(join(absolutePath, composedPath))
+                result.push({ path: join(absolutePath, composedPath), file: subPath, fullName: composedPath.replace("./", "").replaceAll("/", "-")});
             }
         })
         return result;
@@ -35,7 +35,7 @@ module.exports = (() => {
 
     const _getTestJSFiles = (absolutePath, currentPath) => {
         let result = _getAllFiles(absolutePath, currentPath);
-        return result.filter(file => _fileType(file, 'test.js'));
+        return result.filter(item => _fileType(item.file, 'test.js'));
     }
 
     return {
